@@ -1,0 +1,8 @@
+python LSTM.py 200 Basasuya1.csv Basasuya2.csv Basasuya3.csv
+python LSTM.py 50 sin1.csv sin2.csv sin3.csv sin4.csv sin5.csv
+
+python trainLSTM.py trainSin.h5 50 sin1.csv sin2.csv sin3.csv sin4.csv sin5.csv
+
+python testLSTM.py trainSin.h5 sin6.csv sin7.csv sin8.csv sin9.csv sin10.csv
+
+python testLSTM.py trainSin.h5 sin1.csv sin2.csv sin3.csv sin4.csv sin5.csv
