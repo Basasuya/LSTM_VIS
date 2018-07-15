@@ -24,7 +24,9 @@ testPos = []
 
 def split_dataset(dataPath, look_back=10):
     global Dataset, DataSplit
-    dataframe = read_csv(dataPath, usecols=[1], engine='python', skipfooter=3)
+    dataframe = read_csv(dataPath, header=None)
+	#if you test sin function please use
+    # dataframe = read_csv(dataPath, usecols=[1], engine='python', skipfooter=3)
     dataset = dataframe.values
     dataset = dataset.astype('float32')
     for i in dataset:
@@ -32,8 +34,10 @@ def split_dataset(dataPath, look_back=10):
     DataSplit.append(len(dataset))
 
 if __name__ == '__main__':
-	look_back = 10
+	look_back = 50
+	# perhaps you should modify this 
 	for i in range(2, len(sys.argv)):
+		print(sys.argv[i])
 		split_dataset('srcData/' + sys.argv[i], look_back)
 	scaler = MinMaxScaler(feature_range=(0, 1))
 	Dataset = scaler.fit_transform(Dataset)

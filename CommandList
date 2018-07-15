@@ -6,3 +6,8 @@ python trainLSTM.py trainSin.h5 50 sin1.csv sin2.csv sin3.csv sin4.csv sin5.csv
 python testLSTM.py trainSin.h5 sin6.csv sin7.csv sin8.csv sin9.csv sin10.csv
 
 python testLSTM.py trainSin.h5 sin1.csv sin2.csv sin3.csv sin4.csv sin5.csv
+
+
+python LSTM.py 100 2011_1.csv
+
+python testLSTM.py A1.h5 2010_1.csv

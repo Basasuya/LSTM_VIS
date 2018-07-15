@@ -8,6 +8,7 @@ import math
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
+from keras.models import load_model
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 numpy.random.seed(7)
@@ -24,6 +25,8 @@ testPos = []
 
 def split_dataset(dataPath, look_back=10):
     global Dataset, DataSplit
+	#if you test sin function please use
+    # dataframe = read_csv(dataPath, usecols=[1], engine='python', skipfooter=3)
     dataframe = pd.read_csv(dataPath, header=None)
     dataset = dataframe.values
     dataset = dataset.astype('float32')
@@ -32,7 +35,8 @@ def split_dataset(dataPath, look_back=10):
     DataSplit.append(len(dataset))
 
 if __name__ == '__main__':
-	look_back = 10
+	look_back = 50
+	# perhaps you should modify this 
 	doTimes = int(sys.argv[1])
 	for i in range(2, len(sys.argv)):
 		split_dataset('srcData/' + sys.argv[i], look_back)
@@ -63,12 +67,15 @@ if __name__ == '__main__':
 	testX = numpy.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 	# create and fit the LSTM network
 	model = Sequential()
-	model.add(LSTM(50, input_shape=(1, look_back)))
+	model.add(LSTM(100, input_shape=(1, look_back)))
+	model.add(Dense(50))
 	model.add(Dense(25))
 	model.add(Dense(1))
 	model.compile(loss='mean_squared_error', optimizer='adam')
 	model.fit(trainX, trainY, epochs=doTimes, batch_size=1, verbose=2)
 	model.save("A1.h5")
+
+	# model = load_model("A1.h5")
 	# make predictions
 	trainPredict = model.predict(trainX)
 	testPredict = model.predict(testX)
